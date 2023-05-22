@@ -1,4 +1,15 @@
-FROM jupyter/datascience-notebook:notebook-6.5.4
-COPY requirements.txt /home/jovyan/
-RUN pip3 install torch torchvision torchaudio
-RUN pip3 install -r /home/jovyan/requirements.txt
+FROM nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04
+RUN apt update && apt install -y \
+  sudo \
+  wget \
+  vim
+WORKDIR /opt
+RUN wget https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh && \
+  sh Anaconda3-2019.10-Linux-x86_64.sh -b -p /opt/anaconda3/ && \
+  rm -f Anaconda3-2019.10-Linux-x86_64.sh
+
+ENV PATH /opt/anaconda3/bin:$PATH
+
+RUN pip install --upgrade pip
+WORKDIR /
+CMD ["jupyter","lab","--ip=0.0.0.0","--allow-root","--LabApp.token=''"]
