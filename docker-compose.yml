@@ -8,3 +8,9 @@ services:
       - "80:8888"
     tty: true
     stdin_open: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: ["nvidia-compute"]
+              driver: nvidia
