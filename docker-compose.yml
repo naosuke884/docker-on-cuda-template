@@ -12,5 +12,4 @@ services:
       resources:
         reservations:
           devices:
-            - capabilities: ["nvidia-compute"]
-              driver: nvidia
+            driver: nvidia
