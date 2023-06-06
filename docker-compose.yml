@@ -3,13 +3,16 @@ services:
   web:
     build: . 
     volumes:
-      - ./src:/home/jovyan/work
+      - ./work:/home/jovyan/work
+    environment:
+      - TORCH_HOME=/home/jovyan/work/cache
     ports:
-      - "80:8888"
+      - "8888:8888"
     tty: true
     stdin_open: true
     deploy:
       resources:
         reservations:
           devices:
-            driver: nvidia
+            - driver: nvidia
+              capabilities: [gpu]

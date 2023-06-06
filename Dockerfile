@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04
+FROM nvidia/cuda:12.1.1-base-ubuntu20.04
 RUN apt update && apt install -y \
   sudo \
   wget \
